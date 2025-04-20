@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GSP Attendance Management</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script type="module" src="app.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <h1>GSP Attendance Management</h1>
+        <div id="loginScreen">
+            <h2>Login</h2>
+            <div class="form-group">
+                <label for="roleSelect">Select Role:</label>
+                <select id="roleSelect" class="form-control">
+                    <option value="admin">Admin</option>
+                    <option value="teacher">Teacher</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="emailInput">Email:</label>
+                <input type="email" class="form-control" id="emailInput" placeholder="Enter your email">
+            </div>
+            <div class="form-group">
+                <label for="passwordInput">Password:</label>
+                <input type="password" class="form-control" id="passwordInput" placeholder="Enter your password">
+            </div>
+            <button class="btn" id="loginBtn">Login</button>
+            <div id="loginResult"></div>
+        </div>
+
+        <div class="dashboard" id="adminDashboard" style="display: none;">
+            <h2>Admin Dashboard</h2>
+            <h3>View Students</h3>
+            <div class="form-group">
+                <label for="adminCourseSelect">Select Course</label>
+                <select id="adminCourseSelect" class="form-control">
+                    <option value="Deep">Deep</option>
+                    <option value="Digital">Digital</option>
+                    <option value="Divyang">Divyang</option>
+                    <option value="Massage">Massage</option>
+                </select>
+            </div>
+            <button class="btn" id="viewStudentsBtn">View Students</button>
+            <div id="adminContent"></div>
+
+            <h3>View Attendance</h3>
+            <div class="form-group">
+                <label for="attendanceCourseSelect">Select Course</label>
+                <select id="attendanceCourseSelect" class="form-control">
+                    <option value="Deep">Deep</option>
+                    <option value="Digital">Digital</option>
+                    <option value="Divyang">Divyang</option>
+                    <option value="Massage">Massage</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="attendanceDate">Select Date</label>
+                <input type="date" class="form-control" id="attendanceDate">
+            </div>
+            <button class="btn" id="viewAttendanceBtn">View Attendance</button>
+            <div id="attendanceContent"></div>
+
+            <div id="attendanceCounts" style="margin-top: 20px;">
+                <p id="presentCount">Present Students: 0</p>
+                <p id="absentCount">Absent Students: 0</p>
+            </div>
+
+            <h3>Assign Teachers</h3>
+            <div class="form-group">
+                <label for="assignTeacherCourseSelect">Select Course</label>
+                <select id="assignTeacherCourseSelect" class="form-control">
+                    <option value="Deep">Deep</option>
+                    <option value="Digital">Digital</option>
+                    <option value="Divyang">Divyang</option>
+                    <option value="Massage">Massage</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="teacherEmail">Enter Teacher Email</label>
+                <input type="email" class="form-control" id="teacherEmail" placeholder="Enter teacher's email">
+            </div>
+            <div class="form-group">
+                <label for="teacherPassword">Create Password</label>
+                <input type="password" class="form-control" id="teacherPassword" placeholder="Enter teacher's password">
+            </div>
+            <button class="btn" id="assignTeacherBtn">Assign Teacher</button>
+            <div id="assignTeacherResult"></div>
+
+            <h3>View Teachers</h3>
+            <button class="btn" id="viewTeachersBtn">View Teachers</button>
+            <div id="teachersContent"></div>
+        </div>
+
+        <!-- Teacher Dashboard -->
+        <div id="teacherDashboard" class="dashboard" style="display: none;">
+            <h2>Teacher Dashboard</h2>
+            <div class="form-group">
+                <label for="teacherCourseSelect">Select Course</label>
+                <select id="teacherCourseSelect" class="form-control" disabled>
+                    <option value="">Select Course</option>
+                    <option value="Deep">Deep</option>
+                    <option value="Digital">Digital</option>
+                    <option value="Divyang">Divyang</option>
+                    <option value="Massage">Massage</option>
+                </select>
+            </div>
+            <button class="btn" id="viewTeacherAttendanceBtn" disabled>View Attendance</button>
+            <button class="btn" id="viewTeacherStudentsBtn">View Students</button>
+            <button class="btn" id="submitTeacherAttendanceBtn">Submit Attendance</button>
+            <div id="teacherContent"></div>
+
+            <div id="teacherAttendanceCounts" style="margin-top: 20px;">
+                <p id="teacherPresentCount">Present Students: 0</p>
+                <p id="teacherAbsentCount">Absent Students: 0</p>
+            </div>
+
+            <!-- Add/Remove Students Section -->
+            <h3>Add/Remove Students</h3>
+            <div class="form-group">
+                <label for="studentName">Student Name:</label>
+                <input type="text" class="form-control" id="studentName" placeholder="Enter student name">
+            </div>
+            <button class="btn" id="addStudentBtn">Add Student</button>
+            <button class="btn" id="removeStudentBtn">Remove Student</button>
+            <div id="studentActionResult"></div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle dark mode
+        document.getElementById("darkModeToggle").addEventListener("click", function() {
+            document.body.classList.toggle("dark-mode");
+        });
+
+        // Login functionality
+        document.getElementById("loginBtn").addEventListener("click", function() {
+            const role = document.getElementById("roleSelect").value;
+            const email = document.getElementById("emailInput").value.trim();
+            const password = document.getElementById("passwordInput").value.trim();
+            const loginResult = document.getElementById("loginResult");
+
+            if (role === "admin") {
+                if (password === "") { //ENTER YOUR PASSWORD
+                    // Show admin dashboard
+                    document.getElementById("loginScreen").style.display = "none";
+                    document.getElementById("adminDashboard").style.display = "block";
+                } else {
+                    loginResult.innerText = "Incorrect admin password.";
+                }
+            } else if (role === "teacher") {
+                // Verify teacher's email and password
+                verifyTeacherCredentials(email, password);
+            }
+        });
+
+        async function verifyTeacherCredentials(email, password) {
+            const teacherDoc = await getDoc(doc(db, "teachers", email));
+            if (teacherDoc.exists()) {
+                const storedPassword = teacherDoc.data().password;
+                if (password === storedPassword) {
+                    // Show teacher dashboard
+                    document.getElementById("loginScreen").style.display = "none";
+                    document.getElementById("teacherDashboard").style.display = "block";
+                    loadTeacherCourses(email); // Load assigned courses for the teacher
+                } else {
+                    document.getElementById("loginResult").innerText = "Incorrect password.";
+                }
+            } else {
+                document.getElementById("loginResult").innerText = "No teacher found with this email.";
+            }
+        }
+    </script>
+</body>
+</html>
