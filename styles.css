@@ -1,0 +1,149 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    flex: 1; /* Allow the container to take up remaining space */
+}
+
+h1, h2, h3 {
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-weight: bold;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    background-color: #5cb85c;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #4cae4c;
+}
+
+.attendance-list {
+    margin-top: 20px;
+}
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    transform: translateX(-100%); /* Move sidebar off-screen */
+    transition: transform 0.3s ease; /* Smooth transition for transform */
+    z-index: 1000; /* Ensure sidebar is above other content */
+}
+
+.sidebar.active {
+    transform: translateX(0); /* Show sidebar */
+}
+
+.sidebar h3 {
+    margin-top: 0;
+}
+
+.sidebar a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.sidebar a:hover {
+    text-decoration: underline;
+}
+
+.menu-icon {
+    font-size: 30px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+/* Close icon styles */
+.close-icon {
+    font-size: 30px;
+    cursor: pointer;
+    text-align: right;
+}
+
+/* Dark Mode Styles */
+.dark-mode {
+    background-color: #333;
+    color: #fff;
+}
+
+.dark-mode .container {
+    background: #444;
+}
+
+.dark-mode .form-control {
+    background: #555;
+    color: #fff;
+    border: 1px solid #777;
+}
+
+.dark-mode .btn {
+    background-color: #5cb85c;
+}
+
+.dark-mode .btn:hover {
+    background-color: #4cae4c;
+}
+
+.dark-mode .sidebar {
+    background-color: #222;
+    color: #fff;
+}
+
+.dark-mode .sidebar a {
+    color: #66aaff; /* Lighter color for links in dark mode */
+}
+
+/* Dashboard Styles */
+.dashboard {
+    margin-top: 20px;
+}
+
+.student-info, .attendance-info, .course-info, .teacher-info {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
