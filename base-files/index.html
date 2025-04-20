@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GSP Attendance Management</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script type="module" src="app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+</head>
+<body>
+    <div class="sidebar" id="sidebar">
+        <div class="close-icon" id="closeIcon">&times;</div>
+        <h3>Developed By <a href="mailto:shashwatsnthakur@gmail.com">SHWAT (Shashwat Thakur)</a></h3>
+        <p>This Project Is Part Of Rural-internship conducted in D.Y. Patil International University.</p>
+        <p>This Attendance management system is created For <a href="https://www.gspindia.org/" target="_blank">Gramin Shramik Pratishthan NGO</a></p>
+        <p>All Rights Are Reserved To SHWAT</p>
+        <button id="darkModeToggle" class="btn">Toggle Dark Mode</button>
+    </div>
+
+    <div class="container">
+        <div class="menu-icon" id="menuIcon">&#9776;</div>
+        <h1>GSP Attendance Management</h1>
+
+        <div class="form-group">
+            <label for="studentName">Student Name</label>
+            <input type="text" class="form-control" id="studentName" placeholder="Enter student name">
+        </div>
+
+        <div class="form-group">
+            <label for="courseSelect">Select Course</label>
+            <select id="courseSelect" class="form-control">
+                <option value="Deep">Deep</option>
+                <option value="Digital">Digital</option>
+                <option value="Divyang">Divyang</option>
+                <option value="Massage">Massage</option>
+            </select>
+        </div>
+
+        <button class="btn" id="addStudentBtn">Add Student</button>
+        <button class="btn" id="removeStudentBtn">Remove Student</button>
+
+        <h2>Attendance</h2>
+        <div class="form-group">
+            <label for="attendanceCourseSelect">Select Course</label>
+            <select id="attendanceCourseSelect" class="form-control">
+                <option value="Deep">Deep</option>
+                <option value="Digital">Digital</option>
+                <option value="Divyang">Divyang</option>
+                <option value="Massage">Massage</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="attendanceDate">Select Date</label>
+            <input type="date" class="form-control" id="attendanceDate">
+        </div>
+        <div class="attendance-list" id="attendanceList"></div>
+        <button class="btn" id="submitAttendanceBtn">Submit Attendance</button>
+
+        <h2>View Attendance</h2>
+        <div class="form-group">
+            <label for="viewAttendanceDate">Select Date</label>
+            <input type="date" class="form-control" id="viewAttendanceDate">
+        </div>
+        <button class="btn" id="viewAttendanceBtn">View Attendance</button>
+        <div id="attendanceReport"></div>
+
+        <h2>Attendance Counts</h2>
+        <div class="form-group">
+            <label for="attendanceCountDate">Select Date</label>
+            <input type="date" class="form-control" id="attendanceCountDate">
+        </div>
+        <button class="btn" id="countAttendanceBtn">Count Attendance</button>
+        <div id="attendanceCountsReport"></div>
+
+        <h2>Generate Attendance Report</h2>
+        <div class="form-group">
+            <label for="reportCourseSelect">Select Course</label>
+            <select id="reportCourseSelect" class="form-control">
+                <option value="Deep">Deep</option>
+                <option value="Digital">Digital</option>
+                <option value="Divyang">Divyang</option>
+                <option value="Massage">Massage</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="reportMonthSelect">Select Month</label>
+            <input type="month" class="form-control" id="reportMonthSelect">
+        </div>
+        <button class="btn" id="generateReportBtn">Generate Report</button>
+    </div>
+
+    <script>
+        // Toggle sidebar visibility
+        document.getElementById("menuIcon").addEventListener("click", function() {
+            const sidebar = document.getElementById("sidebar");
+            sidebar.classList.toggle("active");
+        });
+
+        // Close sidebar
+        document.getElementById("closeIcon").addEventListener("click", function() {
+            const sidebar = document.getElementById("sidebar");
+            sidebar.classList.remove("active");
+        });
+
+        // Toggle dark mode
+        document.getElementById("darkModeToggle").addEventListener("click", function() {
+            document.body.classList.toggle("dark-mode");
+        });
+    </script>
+</body>
+</html>
